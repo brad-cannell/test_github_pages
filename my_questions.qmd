@@ -39,3 +39,14 @@ Yes, from: https://quarto.org/docs/reference/formats/html.html
 ``` yaml
 output-file: "docs/my_questions.html"
 ```
+
+Also, Quatro documents don't currently render well to GitHub pages.
+
+**At lest for now, I think you should stay away from using Quatro for publishing to GitHub pages.**
+
+## Choosing which documents to render for GitHub pages
+
+When working on the link2care_public repository, I wanted to render just a couple of one-off analyses that I could share with collaborators as webpage. However, I definitely don't want to render *all* of the Rmd files in the directory. It looks like I have a couple of options:
+
+1.  Render each file separately and add them to the `docs/` folder. Not terrible if there aren't many files. However, you cannot use the "Build Website" button if you go this route. It overwrites the entire `docs/` folder each time it's run.
+2.  Pass the folder containing the markdown files you want to render to `rmarkdown::render()`. I don't think this will work with Quatro documents though.
