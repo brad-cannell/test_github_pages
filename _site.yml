@@ -7,3 +7,5 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "My Questions"
+      href: my_questions.html

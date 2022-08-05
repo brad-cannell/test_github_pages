@@ -37,3 +37,10 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Mac .DS_Store file
+.DS_Store
+
+# Quatro files
+/.quarto/
+/_site/
