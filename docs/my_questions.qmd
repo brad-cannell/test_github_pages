@@ -1,0 +1,67 @@
+---
+title: "My Questions"
+author: "Brad Cannell"
+format:
+  html: 
+    self-contained: true
+output-file: "docs/my_questions.html"
+editor: visual
+---
+
+The home page (index.Rmd) and the about page (about.Rmd) were automatically created with this project. This page was created by me.
+
+I'm just using this test site to experiment with a few things and try to answer a couple of questions I have.
+
+1.  Can I use Quarto documents interchangeably with Rmarkdown documents in this context?
+2.  Can I do something to control with documents get rendered for the website and which do not. This is important because I don't always want to create an entire repository for a website. Sometimes, I just want to render a couple of individual markdown documents from a research project repository to the web via GitHub pages for sharing. But not every document.
+3.  Can I create subdirectories?
+
+## Using Quarto documents
+
+So, I can't exactly use Quarto documents interchangeably with Rmd documents. At least not right out of the box. I created this page in Quarto, but just clicking the "Build Website" button in RStudio did not render an html document to the docs folder.
+
+Following the guidance here to see if I can figure out what to do: https://quarto.org/docs/publishing/github-pages.html
+
+The site above wasn't actually all that helpful. However, I think adding
+
+``` yaml
+format:
+  html: 
+    self-contained: true
+```
+
+to the yaml header was helpful. Now, when I render the site, only the html document is created. Not the folder with all the other files.
+
+Additionally, I can move the individual html files over to the `doc/` folder manually. However, you don't just have to do this once. You have to do it every time you render the file. I wonder if there is a yaml header I can use to tell Quarto where to put the rendered html file? If so, then I can automatically render to `docs/`.
+
+Yes, from: https://quarto.org/docs/reference/formats/html.html
+
+``` yaml
+output-file: "docs/my_questions.html"
+```
+
+Also, Quatro documents don't currently render well to GitHub pages.
+
+**At lest for now, I think you should stay away from using Quatro for publishing to GitHub pages.**
+
+## Choosing which documents to render for GitHub pages
+
+When working on the link2care_public repository, I wanted to render just a couple of one-off analyses that I could share with collaborators as webpage. However, I definitely don't want to render *all* of the Rmd files in the directory. It looks like I have a couple of options:
+
+1.  Render each file separately and add them to the `docs/` folder. Not terrible if there aren't many files. However, you cannot use the "Build Website" button if you go this route. It overwrites the entire `docs/` folder each time it's run.
+2.  Pass the folder containing the markdown files you want to render to rmarkdown::render_site`()`. I don't think this will work with Quatro documents though.
+
+I'm going to see if moving all of the files in to a gh_pages folder and running the code below works.
+
+```{r}
+#| eval: false
+rmarkdown::render_site(input = "gh_pages")
+```
+
+This doesn't work. It creates the `docs/` inside of the `gh_pages` folder, and GitHub Pages won't look for it there. However, if you look at `?rmarkdown::render_site`, it looks like you can add an `include:` and `exclude:` argument to `_site.yml`. So, next I'm going to try putting all the files back into the root directory, but only including certain pages.
+
+Well, I tried only adding `include: ["index.Rmd"]` to `_site.yml` thinking that everything else would be excluded, that didn't work. Now, I'm going to try specifically excluding about. Rmd `exclude: ["about.Rmd"].`
+
+That didn't work either. Try Custom Site Generation next...
+
+I can't get that to work either. I think the easiest way to get this to work is to use a gh-pages branch and only put the files on that branch that I want rendered.
