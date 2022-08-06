@@ -1,5 +1,6 @@
 ---
 title: "My Website"
+site: "my_site_generator.R"
 ---
 
 Hello, Website!

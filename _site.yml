@@ -1,5 +1,6 @@
 name: "my-website"
 output_dir: docs
+exclude: ["about.Rmd"]
 navbar:
   title: "My Website"
   left:
@@ -7,5 +8,3 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "My Questions"
-      href: my_questions.html

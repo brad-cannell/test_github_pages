@@ -57,3 +57,11 @@ I'm going to see if moving all of the files in to a gh_pages folder and running 
 #| eval: false
 rmarkdown::render_site(input = "gh_pages")
 ```
+
+This doesn't work. It creates the `docs/` inside of the `gh_pages` folder, and GitHub Pages won't look for it there. However, if you look at `?rmarkdown::render_site`, it looks like you can add an `include:` and `exclude:` argument to `_site.yml`. So, next I'm going to try putting all the files back into the root directory, but only including certain pages.
+
+Well, I tried only adding `include: ["index.Rmd"]` to `_site.yml` thinking that everything else would be excluded, that didn't work. Now, I'm going to try specifically excluding about. Rmd `exclude: ["about.Rmd"].`
+
+That didn't work either. Try Custom Site Generation next...
+
+I can't get that to work either. I think the easiest way to get this to work is to use a gh-pages branch and only put the files on that branch that I want rendered.
